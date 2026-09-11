@@ -1,0 +1,2 @@
+// The module is intentionally organized by parsing stages rather than a
+// facade/core/cmd split. Feature packages are added as they become usable.

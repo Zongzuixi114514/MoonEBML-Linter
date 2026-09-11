@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Zongzuixi114514/moonebml/wire/ebml"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn decode_vint(BytesView) -> Result[Vint, VintError]
+
+// Errors
+
+// Types and methods
+pub(all) enum Vint {
+  Known(UInt64, Int)
+  Unknown(Int)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum VintError {
+  NoInput
+  InvalidMarker(Byte)
+  Truncated(Int, Int)
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

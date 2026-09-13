@@ -2,9 +2,9 @@
 
 MoonBit tools for inspecting and validating Matroska/WebM containers.
 
-The first increment implements the EBML variable-size integer decoder. Higher
-layers will be added one feature at a time after each increment has a passing
-test suite.
+The first increments implement EBML wire primitives: variable-size integer
+decoding and element-header reading. Higher layers will be added one feature at
+a time after each increment has a passing test suite.
 
 ## Development
 

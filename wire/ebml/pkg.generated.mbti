@@ -8,9 +8,25 @@ import {
 // Values
 pub fn decode_vint(BytesView) -> Result[Vint, VintError]
 
+pub fn read_element_header(BytesView) -> Result[ElementHeader, ElementHeaderError]
+
 // Errors
 
 // Types and methods
+pub(all) struct ElementHeader {
+  element_id : UInt64
+  element_size : Vint
+  offset : Int
+  id_bytes : Int
+  size_bytes : Int
+  payload_offset : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ElementHeaderError {
+  InvalidIdentifier(VintError)
+  InvalidSize(VintError)
+} derive(Eq, @debug.Debug)
+
 pub(all) enum Vint {
   Known(UInt64, Int)
   Unknown(Int)

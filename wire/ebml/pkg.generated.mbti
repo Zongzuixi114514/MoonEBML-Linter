@@ -8,11 +8,18 @@ import {
 // Values
 pub fn decode_vint(BytesView) -> Result[Vint, VintError]
 
+pub fn read_element(BytesView) -> Result[ElementView, ElementReadError]
+
 pub fn read_element_header(BytesView) -> Result[ElementHeader, ElementHeaderError]
 
 // Errors
 
 // Types and methods
+pub(all) enum ElementExtent {
+  Bounded(Int)
+  ToEnd
+} derive(Eq, @debug.Debug)
+
 pub(all) struct ElementHeader {
   element_id : UInt64
   element_size : Vint
@@ -25,6 +32,18 @@ pub(all) struct ElementHeader {
 pub(all) enum ElementHeaderError {
   InvalidIdentifier(VintError)
   InvalidSize(VintError)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ElementReadError {
+  Header(ElementHeaderError)
+  PayloadLengthOverflow(UInt64)
+  PayloadOutOfBounds(UInt64, Int)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ElementView {
+  header : ElementHeader
+  payload : BytesView
+  extent : ElementExtent
 } derive(Eq, @debug.Debug)
 
 pub(all) enum Vint {

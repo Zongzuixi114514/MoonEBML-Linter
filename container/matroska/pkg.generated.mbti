@@ -9,6 +9,8 @@ import {
 // Values
 pub fn parse_info(@ebml.ElementView) -> Result[InfoMetadata, InfoError]
 
+pub fn parse_track_entry(@ebml.ElementView) -> Result[TrackMetadata, TrackError]
+
 // Errors
 
 // Types and methods
@@ -28,6 +30,27 @@ pub(all) struct InfoMetadata {
   title : String?
   muxing_app : String
   writing_app : String
+} derive(Eq, @debug.Debug)
+
+pub(all) enum TrackError {
+  NotTrackEntry(UInt64)
+  Walk(@ebml.WalkError)
+  Scalar(UInt64, @ebml.ScalarError)
+  DuplicateElement(UInt64)
+  MissingRequired(UInt64)
+  InvalidFlag(UInt64, UInt64)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TrackMetadata {
+  track_number : UInt64
+  track_uid : UInt64
+  track_type : UInt64
+  codec_id : String
+  name : String?
+  language : String?
+  default_duration_nanoseconds : UInt64?
+  flag_default : Bool?
+  flag_forced : Bool?
 } derive(Eq, @debug.Debug)
 
 // Type aliases

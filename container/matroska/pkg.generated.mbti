@@ -7,6 +7,8 @@ import {
 }
 
 // Values
+pub fn parse_audio(@ebml.ElementView) -> Result[AudioMetadata, AudioError]
+
 pub fn parse_info(@ebml.ElementView) -> Result[InfoMetadata, InfoError]
 
 pub fn parse_track_entry(@ebml.ElementView) -> Result[TrackMetadata, TrackError]
@@ -18,6 +20,24 @@ pub fn parse_video(@ebml.ElementView) -> Result[VideoMetadata, VideoError]
 // Errors
 
 // Types and methods
+pub(all) enum AudioError {
+  NotAudioElement(UInt64)
+  Walk(@ebml.WalkError)
+  Scalar(UInt64, @ebml.ScalarError)
+  DuplicateElement(UInt64)
+  MissingRequired(UInt64)
+  InvalidFrequency(UInt64)
+  InvalidChannels
+  InvalidBitDepth
+} derive(Eq, @debug.Debug)
+
+pub(all) struct AudioMetadata {
+  sampling_frequency : Double
+  output_sampling_frequency : Double?
+  channels : UInt64
+  bit_depth : UInt64?
+} derive(Eq, @debug.Debug)
+
 pub(all) enum InfoError {
   NotInfoElement(UInt64)
   Walk(@ebml.WalkError)

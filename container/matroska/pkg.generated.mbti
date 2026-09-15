@@ -1,0 +1,35 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Zongzuixi114514/moonebml/container/matroska"
+
+import {
+  "Zongzuixi114514/moonebml/wire/ebml",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn parse_info(@ebml.ElementView) -> Result[InfoMetadata, InfoError]
+
+// Errors
+
+// Types and methods
+pub(all) enum InfoError {
+  NotInfoElement(UInt64)
+  Walk(@ebml.WalkError)
+  Scalar(UInt64, @ebml.ScalarError)
+  DuplicateElement(UInt64)
+  MissingRequired(UInt64)
+  InvalidTimecodeScale
+} derive(Eq, @debug.Debug)
+
+pub(all) struct InfoMetadata {
+  timecode_scale : UInt64
+  duration : Double?
+  date_utc_unix_nanoseconds : Int64?
+  title : String?
+  muxing_app : String
+  writing_app : String
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

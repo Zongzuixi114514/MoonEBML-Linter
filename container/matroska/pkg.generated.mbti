@@ -13,6 +13,8 @@ pub fn parse_track_entry(@ebml.ElementView) -> Result[TrackMetadata, TrackError]
 
 pub fn parse_tracks(@ebml.ElementView) -> Result[TracksMetadata, TracksError]
 
+pub fn parse_video(@ebml.ElementView) -> Result[VideoMetadata, VideoError]
+
 // Errors
 
 // Types and methods
@@ -64,6 +66,27 @@ pub(all) enum TracksError {
 
 pub(all) struct TracksMetadata {
   entries : ReadOnlyArray[TrackMetadata]
+} derive(Eq, @debug.Debug)
+
+pub(all) enum VideoError {
+  NotVideoElement(UInt64)
+  Walk(@ebml.WalkError)
+  Scalar(UInt64, @ebml.ScalarError)
+  DuplicateElement(UInt64)
+  MissingRequired(UInt64)
+  InvalidFlag(UInt64, UInt64)
+  InvalidDimension(UInt64)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct VideoMetadata {
+  pixel_width : UInt64
+  pixel_height : UInt64
+  display_width : UInt64?
+  display_height : UInt64?
+  display_unit : UInt64?
+  frame_rate : Double?
+  stereo_mode : UInt64?
+  flag_interlaced : Bool?
 } derive(Eq, @debug.Debug)
 
 // Type aliases

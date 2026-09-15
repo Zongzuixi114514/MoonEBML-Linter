@@ -1,1 +1,3 @@
-// EBML wire-level primitives have no external dependencies.
+import {
+  "moonbitlang/core/encoding/utf8",
+}

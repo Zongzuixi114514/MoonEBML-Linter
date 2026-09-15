@@ -6,6 +6,20 @@ import {
 }
 
 // Values
+pub fn date_utc_to_unix_nanoseconds(Int64) -> Int64
+
+pub fn decode_date_utc(BytesView) -> Result[Int64, ScalarError]
+
+pub fn decode_float32(BytesView) -> Result[Float, ScalarError]
+
+pub fn decode_float64(BytesView) -> Result[Double, ScalarError]
+
+pub fn decode_signed(BytesView) -> Result[Int64, ScalarError]
+
+pub fn decode_unsigned(BytesView) -> Result[UInt64, ScalarError]
+
+pub fn decode_utf8(BytesView) -> Result[String, ScalarError]
+
 pub fn decode_vint(BytesView) -> Result[Vint, VintError]
 
 pub fn read_element(BytesView) -> Result[ElementView, ElementReadError]
@@ -54,6 +68,12 @@ pub fn ElementWalker::new(BytesView) -> Self
 pub fn ElementWalker::next(Self) -> Result[WalkStep, WalkError]
 pub fn ElementWalker::position(Self) -> Int
 pub fn ElementWalker::remaining(Self) -> Int
+
+pub(all) enum ScalarError {
+  WidthOutOfRange(Int)
+  ExactWidthRequired(Int, Int)
+  InvalidUtf8
+} derive(Eq, @debug.Debug)
 
 pub(all) enum Vint {
   Known(UInt64, Int)

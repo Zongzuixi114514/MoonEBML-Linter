@@ -1,0 +1,45 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Zongzuixi114514/moonebml/catalog/ebml"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn all_elements() -> ReadOnlyArray[ElementSpec]
+
+pub fn element_count() -> Int
+
+pub fn lookup_element(UInt64) -> ElementSpec?
+
+// Errors
+
+// Types and methods
+pub(all) struct ElementSpec {
+  id : UInt64
+  name : String
+  kind : PayloadKind
+  level : Int
+  occurrence : Occurrence
+  parent_id : UInt64?
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Occurrence {
+  Required
+  Optional
+  Repeated
+} derive(Eq, @debug.Debug)
+
+pub(all) enum PayloadKind {
+  Master
+  Unsigned
+  Signed
+  Float
+  Utf8
+  Binary
+  DateUtc
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

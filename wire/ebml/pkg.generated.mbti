@@ -46,6 +46,15 @@ pub(all) struct ElementView {
   extent : ElementExtent
 } derive(Eq, @debug.Debug)
 
+pub struct ElementWalker {
+  input : BytesView
+  mut cursor : Int
+}
+pub fn ElementWalker::new(BytesView) -> Self
+pub fn ElementWalker::next(Self) -> Result[WalkStep, WalkError]
+pub fn ElementWalker::position(Self) -> Int
+pub fn ElementWalker::remaining(Self) -> Int
+
 pub(all) enum Vint {
   Known(UInt64, Int)
   Unknown(Int)
@@ -55,6 +64,16 @@ pub(all) enum VintError {
   NoInput
   InvalidMarker(Byte)
   Truncated(Int, Int)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum WalkError {
+  Element(Int, ElementReadError)
+  NonProgress(Int)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum WalkStep {
+  Item(ElementView)
+  End
 } derive(Eq, @debug.Debug)
 
 // Type aliases

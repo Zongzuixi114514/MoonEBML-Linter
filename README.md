@@ -3,9 +3,9 @@
 MoonBit tools for inspecting and validating Matroska/WebM containers.
 
 The first increments implement EBML wire primitives: variable-size integer
-decoding, element-header reading, and zero-copy payload views. Higher layers
-will be added one feature at a time after each increment has a passing test
-suite.
+decoding, element-header reading, zero-copy payload views, and a bounded
+element walker. Higher layers will be added one feature at a time after each
+increment has a passing test suite.
 
 ## Development
 

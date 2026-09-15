@@ -11,6 +11,8 @@ pub fn parse_info(@ebml.ElementView) -> Result[InfoMetadata, InfoError]
 
 pub fn parse_track_entry(@ebml.ElementView) -> Result[TrackMetadata, TrackError]
 
+pub fn parse_tracks(@ebml.ElementView) -> Result[TracksMetadata, TracksError]
+
 // Errors
 
 // Types and methods
@@ -51,6 +53,17 @@ pub(all) struct TrackMetadata {
   default_duration_nanoseconds : UInt64?
   flag_default : Bool?
   flag_forced : Bool?
+} derive(Eq, @debug.Debug)
+
+pub(all) enum TracksError {
+  NotTracksElement(UInt64)
+  Walk(@ebml.WalkError)
+  Track(Int, TrackError)
+  MissingTrackEntry
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TracksMetadata {
+  entries : ReadOnlyArray[TrackMetadata]
 } derive(Eq, @debug.Debug)
 
 // Type aliases

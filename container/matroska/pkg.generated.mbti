@@ -11,6 +11,8 @@ pub fn parse_audio(@ebml.ElementView) -> Result[AudioMetadata, AudioError]
 
 pub fn parse_info(@ebml.ElementView) -> Result[InfoMetadata, InfoError]
 
+pub fn parse_segment(@ebml.ElementView) -> Result[SegmentMetadata, SegmentError]
+
 pub fn parse_track_entry(@ebml.ElementView) -> Result[TrackMetadata, TrackError]
 
 pub fn parse_tracks(@ebml.ElementView) -> Result[TracksMetadata, TracksError]
@@ -54,6 +56,20 @@ pub(all) struct InfoMetadata {
   title : String?
   muxing_app : String
   writing_app : String
+} derive(Eq, @debug.Debug)
+
+pub(all) enum SegmentError {
+  NotSegmentElement(UInt64)
+  Walk(@ebml.WalkError)
+  Info(Int, InfoError)
+  Tracks(Int, TracksError)
+  DuplicateElement(UInt64)
+  MissingRequired(UInt64)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct SegmentMetadata {
+  info : InfoMetadata
+  tracks : TracksMetadata
 } derive(Eq, @debug.Debug)
 
 pub(all) enum TrackError {

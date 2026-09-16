@@ -71,6 +71,10 @@ pub(all) struct SegmentMetadata {
   info : InfoMetadata
   tracks : TracksMetadata
 } derive(Eq, @debug.Debug)
+pub fn SegmentMetadata::audio_track_count(Self) -> Int
+pub fn SegmentMetadata::duration_seconds(Self) -> Double?
+pub fn SegmentMetadata::track_count(Self) -> Int
+pub fn SegmentMetadata::video_track_count(Self) -> Int
 
 pub(all) enum TrackError {
   NotTrackEntry(UInt64)

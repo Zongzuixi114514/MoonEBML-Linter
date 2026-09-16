@@ -1,0 +1,44 @@
+name: MoonBit CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    name: Check and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install MoonBit
+        shell: bash
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s latest
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+      - name: Show toolchain
+        run: moon version --all
+
+      - name: Resolve dependencies
+        run: moon update
+
+      - name: Type check
+        run: moon check
+
+      - name: Verify generated interfaces
+        run: |
+          moon info
+          git diff --exit-code
+
+      - name: Run tests
+        run: moon test
+
+      - name: Verify formatting
+        run: |
+          moon fmt
+          git diff --exit-code

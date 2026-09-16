@@ -28,7 +28,7 @@ pub struct ElementWalker {
 ///|
 /// Create a walker positioned at the beginning of `input`.
 pub fn ElementWalker::new(input : BytesView) -> ElementWalker {
-  { input, cursor: 0 }
+  { input, cursor: 0, }
 }
 
 ///|

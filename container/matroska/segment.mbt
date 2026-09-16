@@ -69,7 +69,7 @@ pub fn parse_segment(
     Some(value) => value
     None => return Err(MissingRequired(tracks_id))
   }
-  Ok({ info: segment_info, tracks: segment_tracks })
+  Ok({ info: segment_info, tracks: segment_tracks, })
 }
 
 ///|

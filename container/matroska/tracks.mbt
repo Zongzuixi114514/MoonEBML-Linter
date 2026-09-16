@@ -43,7 +43,7 @@ pub fn parse_tracks(
   if entries.length() == 0 {
     return Err(MissingTrackEntry)
   }
-  Ok({ entries: ReadOnlyArray::from_array(entries[:]) })
+  Ok({ entries: ReadOnlyArray::from_array(entries[:]), })
 }
 
 ///|

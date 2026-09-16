@@ -55,6 +55,6 @@ pub fn read_element(input : BytesView) -> Result[ElementView, ElementReadError] 
       })
     }
     Unknown(_) =>
-      Ok({ header, payload: input.view(start=body_start), extent: ToEnd })
+      Ok({ header, payload: input.view(start=body_start), extent: ToEnd, })
   }
 }

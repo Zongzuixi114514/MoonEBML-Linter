@@ -65,7 +65,7 @@ fn spec(
   occurrence : Occurrence,
   parent_id : UInt64?,
 ) -> ElementSpec {
-  { id, name, kind, level, occurrence, parent_id }
+  { id, name, kind, level, occurrence, parent_id, }
 }
 
 ///|
